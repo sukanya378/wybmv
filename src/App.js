@@ -1,11 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
+import React from 'react';
 
 function App() {
   const [count, setCount] = useState(0);
+  const [gifSource , setGifSource] = useState("/teddy1.gif")
+  const [yesClicked , setYesClicked] = useState(false)
 
-  const gifs = ["/innocent_face.gif" , "/how_dare.gif"  , "/angry_bear.gif" , "pull_cheek.gif", "/bully_cat.gif"]
+  const gifs = ["/how_dare.gif"  , "/angry_bear.gif" , "pull_cheek.gif", "/smirk.gif", "/bully_cat.gif", "/give_up.gif"]
 
   useEffect(() => {
       if(count > 5) setCount(0)
@@ -13,7 +15,7 @@ function App() {
 
   const handleNoEnter = () => {
     console.log("enter")
-    setCount(count + 1)
+    
     let heartSize;
     if (window.matchMedia('(min-width: 768px)').matches) {
       heartSize = 13
@@ -22,34 +24,39 @@ function App() {
     }
     let x = heartSize * (16 * Math.pow(Math.sin(count), 3));
     let y = -heartSize * (13 * Math.cos(count) - 5 * Math.cos(2 * count) - 2 * Math.cos(3 * count) - Math.cos(4 * count));
-
     const button = document.getElementById("no-button")
-    
-    // x += window.innerWidth / 2;
-    // y += window.innerHeight / 2;
     button.style.transform = `translate(${x}px ,  ${y}px)`
-    // button.style.left = x + 'px';
-    // button.style.top = y + 'px';
+    setGifSource(gifs[count])
+    setCount(count + 1)
+    // setTimeout(() => setGifSource("/teddy1.gif") , 3000)
   }
 
-  const handleNoLeave = () => {
-    console.log("leave")
-
-    for (let i = -3; i <= 3; i++) {
-      let line = '';
-      for (let j = -3; j <= 3; j++) {
-          line += (Math.pow(i, 2) + Math.pow(j, 2) < 10) ? '*' : ' ';
-      }
-      console.log(line);
+  const handleYesEnter = () => {
+    setGifSource("/blush.gif")
+    setCount(0)
+    const button = document.getElementById("no-button")
+    button.style.transform = `translate(0px ,  0px)`
   }
 
+  const handleYesLeave = () => {
+    if(!yesClicked) setGifSource("/teddy1.gif")
   }
+
+  const handleYesClick = () => {
+    setYesClicked(true)
+    setGifSource("/heart_burst.gif")
+  }
+
+
   return (
-    <div className='container'>
-      <div><img className="image" src="teddy1.gif" alt="Overlay Image"></img></div>
-      {/* <div><img className="image" src={gifs[count]} alt="Overlay Image"></img></div> */}
-      <button className="yn-button yes" > Yes </button>
-      <button id="no-button" className="yn-button no" onMouseEnter = {handleNoEnter} onMouseLeave = {handleNoLeave}> No </button>
+    <div className='container' onMouseEnter = {handleYesLeave} onCick = {handleYesLeave}>
+      <div><img className="image" src={gifSource} alt="Overlay Image" onMouseEnter = {handleYesLeave} ></img></div>
+      {!yesClicked && 
+        <div className='buttons'>
+          <button className="yn-button yes" onMouseEnter = {handleYesEnter} onMouseLeave = {handleYesLeave} onClick= {handleYesClick}> Yes  </button>
+          <button id="no-button" className="yn-button yes no" onMouseEnter = {handleNoEnter}> No </button>
+        </div>
+      }
     </div>
    
   );

@@ -13,17 +13,24 @@
 
 .image {
   /* background-image: url(../public/love_bg.jpg); */
-  transform: translate(0, 20%);
+  transform: translate(0, 45%);
   /* width: 50% */
+  width: 400px;
+  height: 400px;
 }
 
+
+
 .yn-button{
-  transform: translate(0, 120px);
-  padding : 10px 40px;
   font-size: xx-large;
   font-style: oblique;
   font-family: cursive;
-  
+}
+
+.buttons {
+  transform: translate(0, 120px);
+  display: flex;
+  justify-content: space-around;
 }
 
 .no {
@@ -31,12 +38,47 @@
   /* transition: transform 0.3s ease-in; */
 }
 
+.yes {
+  position: relative;
+  /* margin: 50px; */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.yes::before,
+.yes::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 80px;
+    background-color: white;
+    border-radius: 50px 50px 0 0;
+    outline: 1px solid white;
+
+    transform: rotate(-45deg) translateY(-10px) ;;
+    z-index: -1;
+    /* transform: translate(0, 120px); */
+    /* transform-origin: 0 100%; */
+}
+
+.yes::before {
+    left: 8px;
+    transform: rotate(45deg) translateY(-10px);
+}
+
+.yes::after {
+    left: 0;
+}
+
 
 @media screen and (max-width : 768px){
   .image {
     /* background-image: url(../public/love_bg.jpg); */
     /* transform: translate(0, 100px); */
-    width: 100%;
+    transform: translate(0, 60%);
+    width: 300px;
+    height: 300px;
   } 
 }
 
