@@ -1,5 +1,43 @@
-.App {
+.container {
+  position: relative;
+  width: auto;
+  height: 100vh;
   text-align: center;
+  background-image: url(../public/love_bg.jpg);
+  background-size: cover;
+   /* Adjust how the image covers the div */
+  background-repeat: no-repeat; /* Ensure the image doesn't repeat */
+  background-position: center;
+  background-color: #fff;
+}
+
+.image {
+  /* background-image: url(../public/love_bg.jpg); */
+  transform: translate(0, 20%);
+  /* width: 50% */
+}
+
+.yn-button{
+  transform: translate(0, 120px);
+  padding : 10px 40px;
+  font-size: xx-large;
+  font-style: oblique;
+  font-family: cursive;
+  
+}
+
+.no {
+  margin: 40px 50px;
+  /* transition: transform 0.3s ease-in; */
+}
+
+
+@media screen and (max-width : 768px){
+  .image {
+    /* background-image: url(../public/love_bg.jpg); */
+    /* transform: translate(0, 100px); */
+    width: 100%;
+  } 
 }
 
 .App-logo {
